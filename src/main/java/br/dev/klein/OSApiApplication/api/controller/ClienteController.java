@@ -2,6 +2,7 @@ package br.dev.klein.OSApiApplication.api.controller;
 
 import br.dev.klein.OSApiApplication.domain.model.Cliente;
 import br.dev.klein.OSApiApplication.domain.repository.ClienteRepository;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,8 @@ public class ClienteController {
 
     @GetMapping("/clientes")
     public List<Cliente> listas() {
-        return clienteRepository.findAll();
-        // return clienteRepository.findByNome("mhsok");
+        //return clienteRepository.findAll();
+        return clienteRepository.findByNome("KGe");
         //return clienteRepository.findByNomeContaining("Silva");
     }
     
@@ -46,13 +47,15 @@ public class ClienteController {
     
     @PostMapping("/clientes")
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente adicionar(@RequestBody Cliente cliente) {
+    public Cliente adicionar(@Valid @RequestBody Cliente cliente) 
+    {
         return clienteRepository.save(cliente);
     }
     
     @PutMapping("/clientes/{clienteID}")
-    public ResponseEntity<Cliente> atualizar(@PathVariable Long clienteID, @RequestBody Cliente cliente) {
-        
+    public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteID,
+                                             @RequestBody Cliente cliente) 
+    {
         // Verifica se o cliente existe
         if (!clienteRepository.existsById(clienteID)) {
             return ResponseEntity.notFound().build();
