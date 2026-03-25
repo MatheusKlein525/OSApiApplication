@@ -1,5 +1,5 @@
 
-package br.eti.klein.OSApiApplication.api.exceptionhandler;
+package br.dev.klein.OSApiApplication.api.exceptionhandler;
 
 import java.time.LocalDateTime;
 import java.util.List;
